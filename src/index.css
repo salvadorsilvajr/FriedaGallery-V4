@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Artifika&display=swap");
+/* font-family: artifiko, serif; */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap");
+/* font-family: "Matemasie", sans-serif; */
+
+@import url("https://fonts.googleapis.com/css2?family=Artifika&family=Roboto+Slab:wght@100..900&display=swap");
+/* font-family: "Artifika", serif; */
+
+@import "tailwindcss";
+
+@custom-variant mobile-hover (&:hover);
+
+@theme {
+  --font-artifiko: "artifiko", "serif";
+  --font-Artifika: Artifika, serif;
+
+  --color-primary: #c8e5c8;
+  --color-secundary: #48b548;
+  --color-sec-hover: #136913;
+  /* --color-primary: #73d7f0;
+  --color-secundary: #059981;
+  --color-sec-hover: #44f2d6; */
+  --color-text: #292b2a;
+  --color-bg-app: #f5f4ed;
+  --color-danger: #f00e0e;
+  --color-warning: #f6fa0c;
+  --default-ring-width: 3px;
+  --default-ring-color: var(--color-danger);
+   --some-color: #090909;
+
+}
+
+@layer components {
+  .App {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--color-bg-app);
+    text-color: var(--color-text);
+  }
+}
+
+
+.Toastify__toast-container--top-center {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  cursor: pointer;
+  border: 4px solid withe;
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+  border: 4px solid black;
+}
+.active {
+  cursor: auto;
+}
+.activepage {
+  color: white;
+  background: #087aef;
+  cursor: auto;
+}
+
+/* **************************************** */
+/* estilos para la seccion del Redes Sociales */
+/* ****************************************** */
+
+.redes-sociales .twitter {
+	background: #1da1f2;
+}
+.redes-sociales .facebook {
+	background: #3b5998;
+}
+.redes-sociales .messenger {
+	background: #00b2ff;
+}
+.redes-sociales .whatsapp {
+	background: #128c7e;
+}
+.redes-sociales .instagram {
+	background: #f56040;
+}
+.redes-sociales .linkedln {
+	background: #0e76a8;
+}
+
+.redes-sociales .twitter:hover {
+	border-radius: 15px;
+	color: white;
+}
+.redes-sociales .facebook:hover {
+	border-radius: 15px;
+	color: white;
+}
+.redes-sociales .messenger:hover {
+	border-radius: 15px;
+	color: white;
+}
+.redes-sociales .whatsapp:hover {
+	border-radius: 15px;
+	color: white;
+}
+.redes-sociales .instagram:hover {
+	border-radius: 15px;
+	color: white;
+}
+.redes-sociales .linkedln:hover {
+	border-radius: 15px;
+	color: white;
+}
