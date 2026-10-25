@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useAuthContext } from "./hooks/useAuthContext";
 import { Route, Routes } from "react-router-dom";
 import { useKindUser } from "./hooks/useKindUser.jsx";
@@ -45,6 +46,26 @@ function App() {
       <ToastContainer />
     </div>
   );
+=======
+import { Route, Routes } from "react-router-dom";
+import Home from "./screens/Home.jsx";
+import NotFound from "./Screens/NotFound.jsx";
+import { ToastContainer } from "react-toastify";
+import Main from "./components/Main.jsx";
+
+function App() {
+	return (
+		<div>
+			<Routes>
+				<Route path='/' exact={true} element={<Main />} />
+
+				<Route path='*' element={<NotFound />} />
+			</Routes>
+
+			<ToastContainer />
+		</div>
+	);
+>>>>>>> 34f1a434b99a1ec25e9eeeb09af0c4aa6da57e2d
 }
 
 export default App;

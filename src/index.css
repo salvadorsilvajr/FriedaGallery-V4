@@ -11,6 +11,7 @@
 
 @theme {
   --font-artifiko: "artifiko", "serif";
+<<<<<<< HEAD
   --font-Artifika: Artifika, serif;
 
   --color-primary: #c8e5c8;
@@ -21,10 +22,17 @@
   --color-sec-hover: #44f2d6; */
   --color-text: #292b2a;
   --color-bg-app: #f5f4ed;
+=======
+  --font-Artifika: "Artifika", "serif";
+
+  --color-primary: #48b548;
+  --color-secundary: #136913;
+>>>>>>> 34f1a434b99a1ec25e9eeeb09af0c4aa6da57e2d
   --color-danger: #f00e0e;
   --color-warning: #f6fa0c;
   --default-ring-width: 3px;
   --default-ring-color: var(--color-danger);
+<<<<<<< HEAD
   --some-color: #090909;
 }
 
@@ -37,12 +45,17 @@
     background-color: var(--color-bg-app);
     color: var(--color-text);
   }
+=======
+   --some-color: #090909;
+
+>>>>>>> 34f1a434b99a1ec25e9eeeb09af0c4aa6da57e2d
 }
 
 .Toastify__toast-container--top-center {
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
+<<<<<<< HEAD
 }
 
 /* Add a transparency effect for thumnbail images */
@@ -113,3 +126,6 @@
   border-radius: 15px;
   color: white;
 }
+=======
+};
+>>>>>>> 34f1a434b99a1ec25e9eeeb09af0c4aa6da57e2d
