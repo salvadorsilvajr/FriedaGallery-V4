@@ -1,4 +1,15 @@
 {
+<<<<<<< HEAD
+  "apphosting": {
+    "backendId": "frieda-gallery-v4",
+    "rootDir": "/",
+    "ignore": [
+      "node_modules",
+      ".git",
+      "firebase-debug.log",
+      "firebase-debug.*.log",
+      "functions"
+=======
   "hosting": {
     "public": "dist",
     "ignore": [
@@ -11,6 +22,7 @@
         "source": "**",
         "destination": "/index.html"
       }
+>>>>>>> 34f1a434b99a1ec25e9eeeb09af0c4aa6da57e2d
     ]
   }
 }

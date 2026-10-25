@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
+  "name": "frieda-v4",
+=======
   "name": "build",
+>>>>>>> 34f1a434b99a1ec25e9eeeb09af0c4aa6da57e2d
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -18,7 +22,11 @@
     "react-router-dom": "^7.7.0",
     "react-toastify": "^11.0.5",
     "tailwindcss": "^4.2.2",
+<<<<<<< HEAD
+    "uuid": "^14.0.2"
+=======
     "uuid": "^8.3.2"
+>>>>>>> 34f1a434b99a1ec25e9eeeb09af0c4aa6da57e2d
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
@@ -29,6 +37,10 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.4.0",
+<<<<<<< HEAD
+    "vite": "^7.1.7"
+=======
     "vite": "^7.3.1"
+>>>>>>> 34f1a434b99a1ec25e9eeeb09af0c4aa6da57e2d
   }
 }

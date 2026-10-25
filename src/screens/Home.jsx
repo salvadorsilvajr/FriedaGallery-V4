@@ -1,3 +1,27 @@
+<<<<<<< HEAD
+import MainMenu from "../components/MainMenu";
+import MyCarousel from "../components/MyCarousel";
+import { useState } from "react";
+
+function Home() {
+  const [usedCategoria, setUseCategoria] = useState(null);
+
+  return (
+    <main className="flex flex-col justify-center lg:flex-row">
+      <section className="lg:w-1/8">
+        <MainMenu
+          setUseCategoria={setUseCategoria}
+          usedCategoria={usedCategoria}
+        />
+      </section>
+      {/* <section className='lg:w-6/8'> */}
+      <MyCarousel usedCategoria={usedCategoria} />
+      {/* </section> */}
+      <section className="lg:w-1/8">Right Sectionn</section>
+    </main>
+  );
+}
+=======
 import React from "react";
 import Card from "../components/Card/Card.jsx";
 import CardBody from "../components/Card/CardBody";
@@ -102,5 +126,6 @@ const Home = () => {
 		</div>
 	);
 };
+>>>>>>> 34f1a434b99a1ec25e9eeeb09af0c4aa6da57e2d
 
 export default Home;
