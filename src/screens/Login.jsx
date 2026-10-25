@@ -1,153 +1,155 @@
-import { useState } from "react";
-import { useLogin } from "../hooks/useLogin";
-import { useGoogle } from "../hooks/useGoogle";
-import { useFacebook } from "../hooks/useFacebook";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import UseMyUserContext from "../context/UserContext";
+import Input from "../components/Basicos/Input";
+import Buttons from "../components/Basicos/Buttons";
+import { useUsers } from "../hooks/useUsers";
+// import { useLogin } from "../hooks/useLogin";
+// import { useGoogle } from "../hooks/useGoogle";
+// import { useFacebook } from "../hooks/useFacebook";
 import { MdVisibility } from "react-icons/md";
-import Back from "../components/Back";
-import Input from "../styles/Input";
-import Button from "../styles/Button";
+import { useNavigate, Link } from "react-router-dom";
 
-export default function Login() {
-  // const { user } = useAuthContext();
+const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  // const [faceUser, setFaceUser] = useState(null);
-
-  const { login, error, isPending } = useLogin();
-  const { signinwithgoogle } = useGoogle();
-  const { signinwithfacebook } = useFacebook();
+  const { login, signinwithgoogle, signinwithfacebook, isPending } = useUsers();
+  // const { login, isPending } = useLogin();
+  // const { signinwithgoogle } = useGoogle();
+  // const { signinwithfacebook } = useFacebook();
+  const { userState } = UseMyUserContext();
   const [showPassword, setShowPassword] = useState(false);
-  // const [userDetails, setUserDetails] = useState(null);
+  const [formData, setFormData] = useState({
+    password: "",
+    email: "",
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login(email, password);
-    navigate("/");
+  const { email, password } = formData;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const HandlegoogleSignIn = () => {
-    signinwithgoogle();
-    // toast.success(" user logged in Successfully", {
-    // 	position: "top-center",
-    // });
+    signinwithgoogle("UsersTestCss");
     navigate("/");
   };
   const HandlefacebookignIn = () => {
-    signinwithfacebook();
-    // checkifuserExist(signinwithfacebook);
+    signinwithfacebook("UsersTestCss");
+    navigate("/");
+  };
 
-    // toast.success(" user logged in Successfully", {
-    // 	position: "top-center",
-    // });
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    login(email, password, "UsersTestCss");
     navigate("/");
   };
 
   return (
-    <>
-      <Back />
-      {error && (
-        <div>
-          <button className="flex w-full rounded-md bg-red-600 text-amber-300">
-            <span className="m-auto text-lg font-bold">{error.message}</span>
-          </button>
-        </div>
+    <section id="login" className="w-full">
+      <p>Log In Componet </p>
+      {!userState.dataUser ? (
+        <p className="text-red-500 font-bold"> not user</p>
+      ) : (
+        <p>{userState.dataUser.displayName}</p>
       )}
-      <main className="flex flex-row justify-center md:mt-25">
-        <section className="sm:w-0 lg:w-1/4"></section>
-        <section className="min-h-[40%] w-dvw lg:w-2/4">
-          <div className="flex min-h-full flex-col justify-center px-6 py-8 md:py-0">
-            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-              <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-                Sign in to your account
-              </h2>
+
+      <hr />
+
+      {/* {error && <Msg type="error" msg={error.message} />} */}
+      <div className="grid grid-cols-7 gap-4">
+        <div className="col-span-3 col-start-3">
+          <form onSubmit={handleOnSubmit}>
+            <Input
+              onChange={handleChange}
+              labelname="Your Email"
+              name="email"
+              value={formData.email}
+              variant="email"
+              required
+              placeholder="Title o Question Here"
+              type="email"
+            />
+            <Input
+              onChange={handleChange}
+              labelname="Your Password"
+              name="password"
+              value={formData.password}
+              variant="text"
+              required
+              placeholder="Add your Password"
+              type={showPassword ? "text" : "password"}
+            />
+            <div className="flex w-full flex-row justify-end mt-2 text-sm">
+              <span
+                //   href="#"
+                onClick={() => setShowPassword((prevState) => !prevState)}
+                className="flex justify-end text-sm font-semibold text-secundary hover:text-sec-hover cursor-pointer"
+              >
+                <MdVisibility
+                  style={{
+                    marginRight: ".5rem",
+                    height: "1.5em",
+                    width: "1.5em",
+                  }}
+                />
+                Display password
+              </span>
             </div>
+            {isPending ? (
+              <Buttons
+                estilo="full"
+                tamano="full"
+                name="Loading..."
+                background="primary"
+                type="submit"
+              ></Buttons>
+            ) : (
+              <Buttons
+                estilo="full"
+                tamano="full"
+                name="Submit"
+                background="primary"
+                type="submit"
+              ></Buttons>
+            )}
+          </form>
+          <p className="my-10 text-center text-sm text-gray-500">
+            Not a member?
+            <Link
+              to="/signup"
+              className="font-semibold text-secundary hover:text-sec-hover md:ml-4 hover:text-lg"
+            >
+              Start here Create an Account
+            </Link>
+          </p>
 
-            <div className="mt-10 sm:mx-auto sm:w-full md:w-120">
-              <form onSubmit={handleSubmit}>
-                {/* <div className='mt-2'> */}
-                <Input
-                  onChange={(e) => setEmail(e.target.value)}
-                  name="email"
-                  type="email"
-                  value={email}
-                  labelname="Email Address"
-                  variant="email"
-                  placeholder="youremail@gmail.com"
-                />
-                {/* </div> */}
-
-                {/* <div> */}
-                {/* <div className='mt-2'> */}
-                <Input
-                  onChange={(e) => setPassword(e.target.value)}
-                  name="password"
-                  value={password}
-                  labelname="Password"
-                  type={showPassword ? "text" : "password"}
-                  variant="text"
-                  placeholder="enter your Password"
-                />
-                <div className="flex w-full flex-row justify-end mt-2 text-sm">
-                  <span
-                    //   href="#"
-                    onClick={() => setShowPassword((prevState) => !prevState)}
-                    className="flex justify-end text-sm font-semibold text-secundary hover:text-sec-hover cursor-pointer"
-                  >
-                    <MdVisibility
-                      style={{
-                        marginRight: ".5rem",
-                        height: "1.5em",
-                        width: "1.5em",
-                      }}
-                    />
-                    Display password
-                  </span>
-                </div>
-                {/* </div> */}
-                {/* </div> */}
-
-                <div className="w-full">
-                  {isPending ? (
-                    <Button
-                      variant="secundary"
-                      type="submit"
-                      name="Loading..."
-                    />
-                  ) : (
-                    <Button variant="secundary" type="submit" name="Sign In" />
-                  )}
-                </div>
-              </form>
-
-              <p className="my-10 text-center text-sm text-gray-500">
-                Not a member?
-                <Link
-                  to="/signup"
-                  className="font-semibold text-secundary hover:text-sec-hover md:ml-4 hover:text-lg"
-                >
-                  Start here Create an Account
-                </Link>
-              </p>
-              <div className="my-4 flex justify-center justify-items-center">
-                <Button
-                  onClick={HandlegoogleSignIn}
-                  variant="SignInMedia"
-                  Google={true}
-                ></Button>
-                <Button
-                  onClick={HandlefacebookignIn}
-                  variant="SignInMedia"
-                  Face={true}
-                ></Button>
-              </div>
+          <div className=" flex justify-center justify-items-center">
+            <div onClick={HandlegoogleSignIn} className="mr-2">
+              <Buttons
+                name=""
+                background="SignInMedia"
+                Google={true}
+                estilo="full"
+                tamano="full"
+              ></Buttons>
+            </div>
+            <div onClick={HandlefacebookignIn}>
+              <Buttons
+                name=""
+                background="SignInMedia"
+                Face={true}
+                estilo="full"
+                tamano="full"
+              ></Buttons>
             </div>
           </div>
-        </section>
-        <section className="sm:w-0 lg:w-1/4"></section>
-      </main>
-    </>
+        </div>
+      </div>
+    </section>
   );
-}
+};
+
+export default Login;

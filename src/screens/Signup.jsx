@@ -1,145 +1,133 @@
 import { useState } from "react";
-import { useSignup } from "../hooks/useSignup";
-// import { useAuthContext } from "../hooks/useAuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import UseMyUserContext from "../context/UserContext";
+import Input from "../components/Basicos/Input";
+import Buttons from "../components/Basicos/Buttons";
+import { useUsers } from "../hooks/useUsers";
+// import { useSignup } from "../hooks/useSignup";
 import { MdVisibility } from "react-icons/md";
-import Back from "../components/Back";
-import Input from "../styles/Input";
-import Button from "../styles/Button";
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
-export default function Login() {
-	// const { user } = useAuthContext();
-	const navigate = useNavigate();
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [displayName, setDisplayName] = useState("");
+const SignUp = () => {
+  const navigate = useNavigate();
+  const { signup, isPending } = useUsers();
+  const { userState } = UseMyUserContext();
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    password: "",
+    email: "",
+    userName: "",
+  });
 
-	// const [faceUser, setFaceUser] = useState(null);
+  const { email, password, userName } = formData;
 
-	const { signup, isPending, error } = useSignup();
-	const [showPassword, setShowPassword] = useState(false);
-	// const [userDetails, setUserDetails] = useState(null);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		signup(email, password, displayName);
-		navigate("/");
-	};
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    signup(email, password, userName, "UsersTestCss");
+    navigate("/");
+  };
 
-	return (
-		<>
-			<Back />
-			{error && (
-				<div>
-					<button className='flex w-full rounded-md bg-red-600 text-amber-300'>
-						<span className='m-auto text-lg font-bold'>{error.message}</span>
-					</button>
-				</div>
-			)}
-			<main className='flex flex-row justify-center md:mt-25'>
-				<section className='sm:w-0 lg:w-1/4'></section>
-				<section className='min-h-[40%] w-dvw lg:w-2/4'>
-					<div className='flex min-h-full flex-col justify-center px-6 py-8 md:py-0'>
-						<div className='sm:mx-auto sm:w-full sm:max-w-sm'>
-							<h2 className='mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900'>
-								Create a New Account
-							</h2>
-						</div>
+  return (
+    <section id="login" className="w-full">
+      <p>Log In Componet </p>
+      {!userState.dataUser ? (
+        <p className="text-red-500 font-bold"> not user</p>
+      ) : (
+        <p>{userState.dataUser.displayName}</p>
+      )}
 
-						<div className='mt-10 sm:mx-auto sm:w-full md:w-120'>
-							<form onSubmit={handleSubmit}>
-								{/* <div className='mt-2'> */}
-								<Input
-									onChange={(e) => setEmail(e.target.value)}
-									name='email'
-									type='email'
-									value={email}
-									labelname='Email Address'
-									variant='email'
-									placeholder='youremail@gmail.com'
-									// onChange={(e) => setEmail(e.target.value)}
-									// type='email'
-									// name='Email Address'
-									// variant='email'
-									// placeholder='youremail@gmail.com'
-								/>
-								{/* </div> */}
+      <hr />
 
-								<>
-									{/* <div className='mt-2'> */}
-									<Input
-										style={{ marginBottom: "1px" }}
-										onChange={(e) => setPassword(e.target.value)}
-										name='password'
-										value={password}
-										labelname='Password'
-										type={showPassword ? "text" : "password"}
-										variant='text'
-										placeholder='enter your Password'
-										// onChange={(e) => setPassword(e.target.value)}
-										// name='Password'
-										// type={showPassword ? "text" : "password"}
-										// variant='text'
-										// placeholder='enter your Password'
-									/>
-									<div className='flex w-full flex-row justify-end  text-sm'>
-										<span
-											//   href="#"
-											onClick={() => setShowPassword((prevState) => !prevState)}
-											className='flex justify-end text-sm font-semibold text-secundary hover:text-sec-hover cursor-pointer'
-										>
-											<MdVisibility
-												style={{
-													marginRight: ".5rem",
-													height: "1.5em",
-													width: "1.5em",
-												}}
-											/>
-											Display password
-										</span>
-									</div>
-									{/* </div> */}
-									{/* <div className='mt-2'> */}
-									<Input
-										onChange={(e) => setDisplayName(e.target.value)}
-										name='displayName'
-										type='text'
-										value={displayName}
-										labelname='Display Name'
-										variant='text'
-										placeholder='Choose your Display Name'
-										// onChange={(e) => setDisplayName(e.target.value)}
-										// type='displayName'
-										// name='Display Name'
-										// variant='text'
-										// placeholder='Choose Your Display Name'
-									/>
-									{/* </div> */}
-								</>
+      {/* {error && <Msg type="error" msg={error.message} />} */}
+      <div className="grid grid-cols-7 gap-4">
+        <div className="col-span-3 col-start-3">
+          <form onSubmit={handleOnSubmit}>
+            <Input
+              onChange={handleChange}
+              labelname="Your Email"
+              name="email"
+              value={formData.email}
+              variant="email"
+              required
+              placeholder="Title o Question Here"
+              type="email"
+            />
+            <Input
+              onChange={handleChange}
+              labelname="Your Password"
+              name="password"
+              value={formData.password}
+              variant="text"
+              required
+              placeholder="Add your Password"
+              type={showPassword ? "text" : "password"}
+            />
 
-								<div className='w-full'>
-									{isPending ? (
-										<Button type='submit' name='Loading...' />
-									) : (
-										<Button type='submit' name='Create new Account' />
-									)}
-								</div>
-							</form>
+            <div className="flex w-full flex-row justify-end mt-2 text-sm">
+              <span
+                //   href="#"
+                onClick={() => setShowPassword((prevState) => !prevState)}
+                className="flex justify-end text-sm font-semibold text-secundary hover:text-sec-hover cursor-pointer"
+              >
+                <MdVisibility
+                  style={{
+                    marginRight: ".5rem",
+                    height: "1.5em",
+                    width: "1.5em",
+                  }}
+                />
+                Display password
+              </span>
+            </div>
+            <Input
+              onChange={handleChange}
+              labelname="Display Name"
+              name="userName"
+              value={formData.userName}
+              variant="text"
+              required
+              placeholder="choose your Display Name"
+              type="text"
+            />
+            {isPending ? (
+              <Buttons
+                estilo="full"
+                tamano="full"
+                name="Loading..."
+                background="primary"
+                type="submit"
+              ></Buttons>
+            ) : (
+              <Buttons
+                estilo="full"
+                tamano="full"
+                name="Submit"
+                background="primary"
+                type="submit"
+              ></Buttons>
+            )}
+          </form>
+          <p className="my-10 text-center text-sm text-gray-500">
+            Do you have an Account ?
+            <Link
+              to="/login"
+              className="font-semibold text-secundary hover:text-sec-hover md:ml-4 hover:text-lg"
+            >
+              Go Back to Log In
+            </Link>
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-							<p className='my-10 text-center text-sm text-gray-500'>
-								Do you have an Account ?
-								<Link
-									to='/login'
-									className='font-semibold text-secundary hover:text-sec-hover md:ml-4 hover:text-lg'
-								>
-									Go Back to Log In
-								</Link>
-							</p>
-						</div>
-					</div>
-				</section>
-				<section className='sm:w-0 lg:w-1/4'></section>
-			</main>
-		</>
-	);
-}
+export default SignUp;
