@@ -247,7 +247,7 @@ export const useUsers = () => {
       await auth.signOut();
 
       // dispatch logout action
-      dispatch({ type: "LOGOUT" });
+      dispatchUser({ type: "LOGOUT" });
 
       // update state
       if (!isCancelled) {

@@ -9,22 +9,13 @@ const RandomImg = ({ setShow }) => {
   useEffect(() => {
     setTimeout(() => {
       setShow(false);
-    }, 4000);
+    }, 3500);
   }, []);
 
   const r = items[Math.floor(Math.random() * items.length)];
   return (
-    <div className="p-4 h-screen w-screen flex">
-      <Imagenes
-        className={
-          r.ImgLandscape
-            ? "  p-4 h-screen-2xl  outline-offset-2 outline-solid   "
-            : " w-screen-md outline-2 outline-offset-2 outline-solid  "
-        }
-        src={r.photoURL}
-        estilo={r.ImgLandscape ? "land" : "port"}
-        tamano={r.ImgLandscape ? "land" : "port"}
-      ></Imagenes>
+    <div className="fixed inset-0 w-screen h-[100%] z-0">
+      <Imagenes src={r.photoURL} estilo="full" tamano="full"></Imagenes>
     </div>
   );
 };

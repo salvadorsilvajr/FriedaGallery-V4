@@ -3,11 +3,11 @@ import Buttons from "./Buttons";
 import Fonts from "./Fonts";
 import Imagenes from "./Imagenes";
 import { Link, NavLink } from "react-router-dom";
-import { cardsData } from "../../data/cardsData";
+import { Categories } from "../../data/dropdownOptios";
 import logo from "../../assets/logo.png";
 
-const HamburgerMenu = () => {
-  const user = cardsData[0];
+const HamburgerMenu = ({ user }) => {
+  // const user = cardsData[0];
   // State to manage the menu visibility
   const [isOpen, setIsOpen] = useState(false);
 
@@ -16,40 +16,34 @@ const HamburgerMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  const navLinks = [
-    { title: "Form UseReducer", url: "/" },
-    { title: "UseReducer Provider User", url: "/provider" },
-    { title: "UseReducer Provider product", url: "/products" },
-    // { title: "Others", url: "/OthersHooks" },
-  ];
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white relative">
-        <div className="flex items-center  justify-between h-16">
+      <div className=" px-4  relative">
+        <div className="flex items-center  justify-between">
           {/* Logo Section */}
           <div className="flex-shrink-0">
             <NavLink
               to="/"
               end
-              className={({ isActive }) =>
-                isActive ? "bg-red-500 font-bold" : "text-gray-500"
-              }
+              // className={({ isActive }) =>
+              //   isActive ? "bg-red-500 font-bold" : "text-gray-500"
+              // }
             >
-              {user.image && (
-                <Imagenes
-                  src={logo}
-                  alt={user.title}
-                  estilo="profile"
-                  tamano="profile"
-                />
-              )}
+              {/* {user.photoURL && ( */}
+              <Imagenes
+                src={logo}
+                alt="Logo Image"
+                estilo="profile"
+                tamano="profile"
+              />
+              {/* )} */}
             </NavLink>
           </div>
 
           {/* Desktop Navigation Links */}
           {/* Hidden on mobile (hidden), flexible row on medium screens and up (md:flex) */}
           <div className=" hidden md:flex space-x-8 font-medium">
-            {navLinks.map((link, index) => (
+            {Categories.map((link, index) => (
               <NavLink key={index} to={link.url}>
                 {({ isActive }) => (
                   <Buttons
@@ -64,7 +58,7 @@ const HamburgerMenu = () => {
                       className="px-4"
                       hover={true}
                     >
-                      {link.title}
+                      {link.name}
                     </Fonts>
                   </Buttons>
                 )}
@@ -114,19 +108,21 @@ const HamburgerMenu = () => {
       {/* Conditionally rendered or styled based on the 'isOpen' state */}
       <div
         className={`${
-          isOpen ? "block" : "hidden"
-        } md:hidden bg-primary/20 transition-all duration-300 ease-in-out`}
+          isOpen ? "block " : "hidden"
+        } md:hidden bg-primary transition-all duration-300 ease-in-out`}
       >
-        <div className="px-2 pt-2 pb-4 space-y-1 sm:px-3 shadow-inner absolute right-0 hover:bg-secundary/20">
-          {navLinks.map((link, index) => (
-            <Link
-              key={index}
-              to={link.url}
-              onClick={() => setIsOpen(false)} // Close menu on link click
-              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-secundary/50 hover:text-white transition-colors"
-            >
-              {link.title}
-            </Link>
+        <div className="px-2 pt-2 pb-4 space-y-1 sm:px-3  absolute right-0  ">
+          {Categories.map((link, index) => (
+            <Buttons tamano="full" estilo="full">
+              <Link
+                key={index}
+                to={link.url}
+                onClick={() => setIsOpen(false)} // Close menu on link click
+                // className="block px-3 py-2 rounded-md text-base font-medium hover:bg-secundary/50 hover:text-white transition-colors"
+              >
+                {link.name}
+              </Link>
+            </Buttons>
           ))}
         </div>
       </div>

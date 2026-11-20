@@ -36,19 +36,9 @@ const SignUp = () => {
   };
 
   return (
-    <section id="login" className="w-full">
-      <p>Log In Componet </p>
-      {!userState.dataUser ? (
-        <p className="text-red-500 font-bold"> not user</p>
-      ) : (
-        <p>{userState.dataUser.displayName}</p>
-      )}
-
-      <hr />
-
-      {/* {error && <Msg type="error" msg={error.message} />} */}
-      <div className="grid grid-cols-7 gap-4">
-        <div className="col-span-3 col-start-3">
+    <section id="signup" className="w-full lg:mt-40 mt-30">
+      <div className="flex justify-center">
+        <div className="lg:w-3/8 sm:w-6/8 w-7/8">
           <form onSubmit={handleOnSubmit}>
             <Input
               onChange={handleChange}

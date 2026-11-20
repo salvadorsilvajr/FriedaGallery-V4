@@ -70,13 +70,19 @@ const CreateProduct = () => {
     category,
     ImgLandscape,
   } = formData;
-  // console.log(user);
 
   const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.id]: e.target.value,
-    }));
+    if (e.target.id === "ImgLandscape") {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.id]: JSON.parse(e.target.value),
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    }
   };
 
   const handleOnSubmit = (e) => {
@@ -114,6 +120,33 @@ const CreateProduct = () => {
                 type="text"
               />
               {/* *********** line of Form ******** */}
+              <div className="flex flex-row justify-evenly">
+                <div className="flex items-center text-center w-26  ">
+                  <Input
+                    onChange={onChange}
+                    labelname="Price"
+                    name="price"
+                    value={price}
+                    variant="text"
+                    required
+                    placeholder="Price"
+                    type="text"
+                  />
+                </div>
+                <div className="flex items-center text-center w-26">
+                  <Input
+                    onChange={onChange}
+                    labelname="Year"
+                    name="year"
+                    value={year}
+                    variant="text"
+                    required
+                    placeholder="Year"
+                    type="text"
+                  />
+                </div>
+              </div>
+              {/* *********** line of Form ******** */}
               <div className="flex w-full justify-around border border-gray-300 p-2 rounded-lg">
                 <div className="flex items-center  ">
                   <input
@@ -124,7 +157,7 @@ const CreateProduct = () => {
                     }}
                     id="ImgLandscape"
                     type="radio"
-                    value={true}
+                    value="true"
                     name="ImgLandscape"
                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:bg-green-500 transition-all"
                   />
@@ -144,7 +177,7 @@ const CreateProduct = () => {
                     }}
                     id="ImgLandscape"
                     type="radio"
-                    value={false}
+                    value="false"
                     name="ImgLandscape"
                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:bg-green-500 transition-all"
                   />

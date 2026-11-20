@@ -2,7 +2,7 @@ import React, { Children } from "react";
 import { FaGooglePlusG } from "react-icons/fa6";
 import { FaFacebookSquare } from "react-icons/fa";
 const Buttons = ({
-  name = "Enter",
+  name = "Submit",
   // note children es use only when for HamburgerMenu component
   children,
   // note children es use only when for HamburgerMenu component
@@ -10,7 +10,7 @@ const Buttons = ({
   background = "default",
   hover = true,
   tamano = "small",
-  estilo = "clasico",
+  estilo = "withEffect",
   Google,
   Face,
 }) => {
@@ -33,7 +33,7 @@ const Buttons = ({
     small: "w-[3.5em] md:w-[3.8em] lg:w-[4.4em] xl:w-[5em]  p-[.2em] ",
     medium: "w-[4.5em] md:w-[4.8em] lg:w-[5.4em] xl:w-[6em] p-[.2em]",
     large: "w-[6.5em] md:w-[6.8em] lg:w-[7.4em] xl:w-[8em] p-[.2em]",
-    full: "w-full mr-2 px-1 py-1",
+    full: "w-full mr-2 px-1 py-1 rounded-lg",
   };
   const estilos = {
     clasico: "rounded-md",

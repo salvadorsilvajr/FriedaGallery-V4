@@ -36,7 +36,8 @@ export const UserReducer = (state, action) => {
         }
       );
     case "LOGOUT":
-      // localStorage.removeItem("data");
+      localStorage.removeItem("data");
+      window.location.reload();
       return { ...state, user: null, authIsReady: false };
     default:
       return state;

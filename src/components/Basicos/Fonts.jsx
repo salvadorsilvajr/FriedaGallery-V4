@@ -2,7 +2,8 @@ import React from "react";
 
 const Fonts = ({
   children,
-  className = "",
+  className,
+  font = "Artifika",
   color = "default",
   hover = false,
   tamano = "texto",
@@ -22,20 +23,25 @@ const Fonts = ({
     dark: "bg-gray-800 border border-gray-700 text-white",
   };
 
+  const fonts = {
+    Matemasie: "font-Matemasie",
+    Artifika: "font-Artifika",
+    artifiko: "font-artifiko",
+  };
+
   const hoverStyles = hover ? "hover:text-white" : "";
 
   const tamanos = {
     title:
-      "font-semibold text-[.80em] md:text-[1.20em] lg:text-[1.40em] xl:text-[1.60em] font-artifiko ",
+      "font-semibold text-[1.2em] md:text-[1.25em] lg:text-[1.30em] xl:text-[1.32em]  ",
     subtitle:
-      "font-medium text-[.60em] md:text-[.70em]  lg:text-[.80em]  xl:text-[1.0em] font-Artifika ",
-    texto:
-      "font-thin font-openSans text-[.70em] md:text-[.75em]  lg:text-[.80em]  xl:text-[.90em]",
+      "font-medium text-[.90em] md:text-[1.10em]  lg:text-[1.15em]  xl:text-[1.20em]  ",
+    texto: " text-[.70em] md:text-[.72em]  lg:text-[.74em]  xl:text-[.75em]",
   };
 
   return (
     <div
-      className={`${baseStyles}  ${colors[color]} ${hoverStyles} ${tamanos[tamano]} ${className}`}
+      className={`${baseStyles}  ${colors[color]} ${hoverStyles} ${tamanos[tamano]} ${className} ${fonts[font]}`}
     >
       {children}
     </div>

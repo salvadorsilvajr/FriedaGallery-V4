@@ -52,16 +52,16 @@ export const cardsData = [
     description:
       "Experience the vast dunes and stunning sunsets of the Arabian desert.",
     image:
-      "https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?w=400&h=300&fit=crop",
+      "https://firebasestorage.googleapis.com/v0/b/freda-gallery-v4.firebasestorage.app/o/projects%2Fedd6acfc-10ba-400f-911e-723d624b5837-Special_Void.jpg?alt=media&token=f8857766-8e64-4e13-99ce-8c1b4db06d66",
     ImgO: "l",
     // No price provided
     rating: 4.6,
     category: "Adventure",
   },
-  {
-    id: 6,
-    title: "Winter Wonderland",
-    // Minimal data - only title
-    category: "Seasonal",
-  },
+  // {
+  //   id: 6,
+  //   title: "Winter Wonderland",
+  //   // Minimal data - only title
+  //   category: "Seasonal",
+  // },
 ];

@@ -8,6 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import useUploadImage from "../hooks/useUploadImage";
 import { useUpdateDoc, delOldUserPic } from "../hooks/useUpdateDoc";
+import Back from "../components/Back";
 
 const EditUser = () => {
   const navigate = useNavigate();
@@ -48,151 +49,144 @@ const EditUser = () => {
   };
 
   return (
-    <section id="login" className="w-full">
-      <p>Log In Componet </p>
-      {!userState.dataUser ? (
-        <p className="text-red-500 font-bold"> not user</p>
-      ) : (
-        <p>{userState.dataUser.displayName}</p>
-      )}
-
-      <hr />
-
-      {/* {error && <Msg type="error" msg={error.message} />} */}
-      <div className="grid grid-cols-7 gap-4">
-        <div className="lg:col-span-3 col-span-5 lg:col-start-3 col-start-2">
-          <form onSubmit={handleOnSubmit}>
-            <div className="flex justify-evenly my-3 items-center">
-              <div>
-                <p className="text-center">Current</p>
-                <Imagenes
-                  src={userState.dataUser.photoURL}
-                  estilo="square"
-                  tamano="square"
-                ></Imagenes>
-              </div>
-              <div className="flex flex-col items-center">
-                <p className="text-center">New Pic</p>
-                {preview ? (
+    <>
+      {/* <Back /> */}
+      <section className="w-full lg:mt-15 mt-10 mb-24">
+        <div className="flex justify-center">
+          <div className="lg:w-4/8 sm:w-6/8 w-7/8">
+            <form onSubmit={handleOnSubmit}>
+              <div className="flex justify-evenly my-3 items-center">
+                <div>
+                  <p className="text-center">Current</p>
                   <Imagenes
-                    src={preview}
+                    src={userState.dataUser.photoURL}
                     estilo="square"
                     tamano="square"
                   ></Imagenes>
-                ) : (
-                  <>
-                    <span
-                      className="cursor-pointer"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        myPic.current.click();
-                      }}
-                    >
-                      <Imagenes estilo="square" tamano="squa"></Imagenes>
-                    </span>
-                    <Input
-                      onChange={(event) => {
-                        const file = event.target.files[0];
-                        let nameFile = "";
-                        if (file && file.type.substr(0, 5) === "image") {
-                          setFile(file);
-                          nameFile = `${uuidv4()}-${file.name}`;
-                          setFileName(nameFile);
-                          setFormData((prev) => ({
-                            ...prev,
-                            ["photoRef"]: nameFile,
-                          }));
-                        } else {
-                          setFile(null);
-                        }
-                        if (file) {
-                          const reader = new FileReader();
-                          reader.onloadend = () => {
-                            const Base64 = reader.result;
-                            setPreview(Base64);
-                          };
-                          reader.readAsDataURL(file);
-                        } else {
-                          setPreview(null);
-                        }
-                        useUploadImage(
-                          file,
-                          nameFile,
-                          setProgress,
-                          setFormData,
-                          "userImages",
-                        );
-                      }}
-                      ref={myPic}
-                      accept="image/*"
-                      style={{ display: "none" }}
-                      labelname=""
-                      type="file"
-                      name="file"
-                      // value=''
-                      variant="text"
-                      required
-                    />
-                    {/* *****************  Linea *********************** */}
-                    {/* <div className="mt-2">
+                </div>
+                <div className="flex flex-col items-center">
+                  <p className="text-center">New Pic</p>
+                  {preview ? (
+                    <Imagenes
+                      src={preview}
+                      estilo="square"
+                      tamano="square"
+                    ></Imagenes>
+                  ) : (
+                    <>
+                      <span
+                        className="cursor-pointer"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          myPic.current.click();
+                        }}
+                      >
+                        <Imagenes estilo="square" tamano="square"></Imagenes>
+                      </span>
+                      <Input
+                        onChange={(event) => {
+                          const file = event.target.files[0];
+                          let nameFile = "";
+                          if (file && file.type.substr(0, 5) === "image") {
+                            setFile(file);
+                            nameFile = `${uuidv4()}-${file.name}`;
+                            setFileName(nameFile);
+                            setFormData((prev) => ({
+                              ...prev,
+                              ["photoRef"]: nameFile,
+                            }));
+                          } else {
+                            setFile(null);
+                          }
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              const Base64 = reader.result;
+                              setPreview(Base64);
+                            };
+                            reader.readAsDataURL(file);
+                          } else {
+                            setPreview(null);
+                          }
+                          useUploadImage(
+                            file,
+                            nameFile,
+                            setProgress,
+                            setFormData,
+                            "userImages",
+                          );
+                        }}
+                        ref={myPic}
+                        accept="image/*"
+                        style={{ display: "none" }}
+                        labelname=""
+                        type="file"
+                        name="file"
+                        // value=''
+                        variant="text"
+                        required
+                      />
+                      {/* *****************  Linea *********************** */}
+                      {/* <div className="mt-2">
                       <progress value={progress} max="100" />
                     </div> */}
-                  </>
-                )}
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-            <Input
-              onChange={handleChange}
-              labelname="Your Name"
-              name="displayName"
-              value={formData.displayName}
-              variant="text"
-              required
-              placeholder="Your name Here.."
-              type="text"
-            />
-            <Input
-              onChange={handleChange}
-              labelname="Company"
-              name="company"
-              value={formData.company}
-              variant="text"
-              required
-              placeholder="Company Name"
-              type="text"
-            />
+              <Input
+                onChange={handleChange}
+                labelname="Your Name"
+                name="displayName"
+                value={formData.displayName}
+                variant="text"
+                required
+                placeholder="Your name Here.."
+                type="text"
+              />
+              <Input
+                onChange={handleChange}
+                labelname="Company"
+                name="company"
+                value={formData.company}
+                variant="text"
+                required
+                placeholder="Company Name"
+                type="text"
+              />
 
-            <Input
-              onChange={handleChange}
-              labelname="Your Title"
-              name="title"
-              value={formData.title}
-              variant="text"
-              required
-              placeholder="Ypur Title in the Company"
-              type="text"
-            />
-            {isPending ? (
-              <Buttons
-                estilo="full"
-                tamano="full"
-                name="Loading..."
-                background="primary"
-                type="submit"
-              ></Buttons>
-            ) : (
-              <Buttons
-                estilo="full"
-                tamano="full"
-                name="Submit"
-                background="primary"
-                type="submit"
-              ></Buttons>
-            )}
-          </form>
+              <Input
+                onChange={handleChange}
+                labelname="Your Title"
+                name="title"
+                value={formData.title}
+                variant="text"
+                required
+                placeholder="Ypur Title in the Company"
+                type="text"
+              />
+              {isPending ? (
+                <Buttons
+                  estilo="full"
+                  tamano="full"
+                  name="Loading..."
+                  background="primary"
+                  type="submit"
+                ></Buttons>
+              ) : (
+                <Buttons
+                  estilo="withEffect"
+                  tamano="full"
+                  name="Submit"
+                  background="primary"
+                  type="submit"
+                ></Buttons>
+              )}
+            </form>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
